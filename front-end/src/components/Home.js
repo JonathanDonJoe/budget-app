@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 
 class Home extends Component {
-    state = {  }
+    
+
+    async componentDidMount() {
+        const getUserUrl = `${window.apiUrl}/get-users`
+        const userInfo = await Axios.get(getUserUrl);
+        console.log(userInfo);
+    }
+    
     render() { 
         return(
             <div className='col col-sm-12'>

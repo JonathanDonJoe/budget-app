@@ -25,7 +25,7 @@ class Setup extends Component {
     submitSetup = async (e) => {
         e.preventDefault();
         console.log('Budget:', this.state.budget, '\nName:', this.state.name)
-        const setupUrl = 'http://localhost:3000/setup'
+        const setupUrl = `${window.apiUrl}/setup`
         const setupResponse = await axios({
             method: 'POST',
             data: {
@@ -34,6 +34,11 @@ class Setup extends Component {
             },
             url: setupUrl
         })
+        if (setupResponse.data.msg === 'added') {
+            this.props.history.push('/');
+        } else {
+            // this.props.history.push('/error');
+        }
         console.log(setupResponse);
     }
 
