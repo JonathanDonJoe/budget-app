@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Setup extends Component {
     constructor() {
@@ -21,9 +22,19 @@ class Setup extends Component {
         })
     }
  
-    submitSetup = (e) => {
+    submitSetup = async (e) => {
         e.preventDefault();
         console.log('Budget:', this.state.budget, '\nName:', this.state.name)
+        const setupUrl = 'http://localhost:3000/setup'
+        const setupResponse = await axios({
+            method: 'POST',
+            data: {
+                name: this.state.name,
+                budget: this.state.budget
+            },
+            url: setupUrl
+        })
+        console.log(setupResponse);
     }
 
     render() { 
