@@ -21,10 +21,22 @@ router.post('/setup', async (req, res) => {
   });
 })
 
-router.get('/get-users', (req, res) => {
+router.post('/get-users', async (req, res) => {
+  // res.json({
+  //   msg:'hey you found me'
+  // })
+  console.log(req.body);
+
+  const getUserQuery = `
+  SELECT * FROM users
+  WHERE name = $1
+  `
+  const getUser = await db.any(getUserQuery, req.body.name)
+
   res.json({
-    msg:'hey you found me'
+    msg: getUser
   })
+
 })
 
 module.exports = router;
