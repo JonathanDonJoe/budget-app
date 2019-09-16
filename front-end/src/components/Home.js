@@ -25,7 +25,8 @@ class Home extends Component {
         const getUserUrl = `${window.apiUrl}/get-users`
         const userInfo = await Axios.post(getUserUrl, {name:this.props.name});
         console.log(userInfo);
-        this.props.setUserInfo(userInfo)
+        this.props.setUserInfo(userInfo.data.msg)
+        console.log(userInfo.data.msg)
     }
 
     submitNameHandler = (e) => {
@@ -50,10 +51,18 @@ class Home extends Component {
                 </div>
             return(form)
         }
+        console.log(this.props.userInfo)
 
-        return(
+        if (!this.props.userInfo.length) {
+            return (
+                <h1>hi</h1>
+            )
+        }
+
+        
+        return (
             <div className='col col-sm-12'>
-                <div className='total-budget'>Total Budget: $2000</div>
+                <div className='total-budget'>Total Budget: {this.props.userInfo[0].budget}</div>
                 <div className='total-spent'>Total Spent: $1000</div>
             </div>
         )

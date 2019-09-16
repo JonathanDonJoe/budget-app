@@ -10,7 +10,7 @@ import Income from './components/Income'
 class App extends Component {
   state = {
     name: '',
-    userInfo:{}
+    userInfo:[]
   }
   
 
@@ -21,8 +21,10 @@ class App extends Component {
   }
 
   setUserInfo = (userInfo) => {
-    this.setState(
-      userInfo
+    this.setState({
+      userInfo: userInfo
+    }
+      
     )
   }
 
@@ -37,6 +39,7 @@ class App extends Component {
                 changeName={this.changeName} 
                 name={this.state.name} 
                 setUserInfo= {this.setUserInfo}
+                userInfo= {this.state.userInfo}
               />
             } />
             <Route exact path='/setup' component={Setup} />
